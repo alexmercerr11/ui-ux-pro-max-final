@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tandem Operations — Operations Consulting for Small Businesses | Toronto</title>
+  <meta name="description" content="Tandem Operations helps small business owners in Toronto reclaim their time by building the operational systems that run and scale their business. Book a free strategy call.">
+  <meta name="robots" content="index, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --cream:      #F7F4EE;
+  --cream-dark: #EDE9E0;
+  --white:      #FFFFFF;
+  --ink:        #1C1915;
+  --ink-2:      #58534A;
+  --ink-3:      #9E9890;
+  --ink-4:      #C5BDB0;
+  --gold:       #B07A18;
+  --gold-2:     #C98E22;
+  --border:     #DBD5C9;
+  --border-2:   #C5BDB0;
+  --shadow-sm:  0 1px 4px rgba(28,25,21,0.06);
+  --shadow-md:  0 4px 20px rgba(28,25,21,0.08);
+  --shadow-lg:  0 12px 40px rgba(28,25,21,0.10);
+  --nav-h:      64px;
+  --max-w:      1100px;
+  --ease:       170ms ease;
+  --ease-slow:  320ms ease;
+}
+
+/* ─── RESET ──────────────────────────────────────────────── */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+html { scroll-behavior:smooth }
+body {
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.6;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100dvh;
+}
+a { color:inherit; text-decoration:none }
+img { max-width:100%; display:block }
+button { cursor:pointer; border:none; background:none; font:inherit; color:inherit }
+ul { list-style:none }
+
+/* Subtle noise texture */
+body::after {
+  content:'';
+  position:fixed;
+  top:-50%; left:-50%;
+  width:200%; height:200%;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.028;
+  pointer-events:none;
+  z-index:9999;
+}
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────────── */
+.serif { font-family:'Playfair Display',Georgia,serif }
+
+/* ─── SHARED LAYOUT ──────────────────────────────────────── */
+.wrap { max-width:var(--max-w); margin:0 auto; padding:0 clamp(20px,5vw,56px) }
+.rule { width:36px; height:1.5px; background:var(--gold); border-radius:1px }
+.rule-long { width:100%; height:1px; background:var(--border) }
+
+/* ─── NAVIGATION ─────────────────────────────────────────── */
+.nav {
+  position:fixed; top:0; left:0; right:0;
+  height:var(--nav-h);
+  background:rgba(247,244,238,0.97);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  z-index:1000;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 clamp(20px,5vw,56px);
+}
+.nav-logo {
+  display:flex; flex-direction:column; line-height:1.15; cursor:pointer;
+  user-select:none;
+}
+.nav-logo .wordmark {
+  font-family:'Playfair Display',serif;
+  font-size:17px; font-weight:500; letter-spacing:-0.01em; color:var(--ink);
+}
+.nav-logo .tagline {
+  font-size:9px; font-weight:500; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--ink-3); margin-top:2px;
+}
+.nav-links { display:flex; align-items:center }
+.nav-links a {
+  padding:8px 14px; font-size:13px; font-weight:500; color:var(--ink-2);
+  transition:color var(--ease);
+  position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:3px; left:14px; right:14px;
+  height:1px; background:var(--gold); opacity:0;
+  transition:opacity var(--ease);
+}
+.nav-links a:hover { color:var(--ink) }
+.nav-links a:hover::after { opacity:1 }
+.nav-links a.active { color:var(--ink) }
+.nav-links a.active::after { opacity:1 }
+.nav-cta {
+  font-size:12.5px; font-weight:600; color:var(--gold);
+  border:1px solid var(--gold);
+  padding:7px 17px; border-radius:2px;
+  letter-spacing:0.02em;
+  transition:background var(--ease), color var(--ease);
+}
+.nav-cta:hover { background:var(--gold); color:var(--white) }
+.hamburger {
+  display:none; flex-direction:column; gap:5px;
+  padding:8px; cursor:pointer;
+}
+.hamburger span {
+  display:block; width:20px; height:1.5px;
+  background:var(--ink); border-radius:1px;
+  transition:transform .22s, opacity .22s;
+}
+.hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg) }
+.hamburger.open span:nth-child(2) { opacity:0 }
+.hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg) }
+.mob-menu {
+  display:none; position:fixed;
+  top:var(--nav-h); left:0; right:0;
+  background:var(--cream); border-bottom:1px solid var(--border);
+  padding:16px 20px 20px; z-index:999;
+  flex-direction:column; gap:2px;
+}
+.mob-menu.open { display:flex }
+.mob-menu a {
+  padding:12px 8px; font-size:15px; font-weight:500;
+  color:var(--ink-2); border-bottom:1px solid var(--border);
+  transition:color var(--ease);
+}
+.mob-menu a:last-of-type { border-bottom:none }
+.mob-menu a.active, .mob-menu a:hover { color:var(--ink) }
+.mob-cta {
+  margin-top:14px; display:block; text-align:center;
+  border:1px solid var(--gold); color:var(--gold);
+  font-weight:500; font-size:14px;
+  padding:12px; border-radius:2px;
+  transition:background var(--ease), color var(--ease);
+}
+.mob-cta:hover { background:var(--gold); color:var(--white) }
+
+/* ─── PAGE SYSTEM ────────────────────────────────────────── */
+.page { display:none; min-height:100dvh; padding-top:var(--nav-h) }
+.page.active { display:block }
+
+/* ─── BUTTONS ────────────────────────────────────────────── */
+.btn {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:13.5px; font-weight:500; padding:12px 24px; border-radius:2px;
+  transition:all var(--ease); cursor:pointer; letter-spacing:0.01em;
+}
+.btn-solid { background:var(--ink); color:var(--white) }
+.btn-solid:hover { background:#2D2922 }
+.btn-gold { background:var(--gold); color:var(--white) }
+.btn-gold:hover { background:var(--gold-2) }
+.btn-outline { border:1px solid var(--border-2); color:var(--ink-2); background:transparent }
+.btn-outline:hover { border-color:var(--ink); color:var(--ink) }
+.btn-text {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:13.5px; font-weight:500; color:var(--gold);
+  border-bottom:1px solid transparent;
+  transition:border-color var(--ease);
+  padding-bottom:1px;
+}
+.btn-text:hover { border-color:var(--gold) }
+
+/* ─── SCROLL REVEAL ──────────────────────────────────────── */
+.reveal {
+  opacity:0; transform:translateY(18px);
+  transition:opacity 0.52s ease, transform 0.52s ease;
+}
+.reveal.visible { opacity:1; transform:none }
+.reveal-delay-1 { transition-delay:.06s }
+.reveal-delay-2 { transition-delay:.12s }
+.reveal-delay-3 { transition-delay:.18s }
+.reveal-delay-4 { transition-delay:.24s }
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+.ft {
+  background:var(--ink); color:rgba(255,255,255,0.65);
+  padding:clamp(48px,7vw,80px) 0 32px;
+}
+.ft-grid {
+  display:grid; grid-template-columns:2fr 1fr 1fr;
+  gap:48px; margin-bottom:52px;
+}
+.ft-brand .wordmark {
+  font-family:'Playfair Display',serif;
+  font-size:18px; font-weight:500; color:#fff; margin-bottom:12px;
+}
+.ft-brand p { font-size:13px; line-height:1.75; max-width:240px; color:rgba(255,255,255,0.5) }
+.ft-col h4 {
+  font-size:10px; font-weight:600; letter-spacing:0.14em;
+  text-transform:uppercase; color:rgba(255,255,255,0.3);
+  margin-bottom:18px;
+}
+.ft-col ul { display:flex; flex-direction:column; gap:11px }
+.ft-col a { font-size:13px; transition:color var(--ease); color:rgba(255,255,255,0.6) }
+.ft-col a:hover { color:#fff }
+.ft-col-cta p { font-size:13px; line-height:1.65; margin-bottom:18px; color:rgba(255,255,255,0.5) }
+.ft-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:13px; font-weight:500; color:rgba(255,255,255,0.75);
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12);
+  padding:10px 18px; border-radius:2px;
+  transition:background var(--ease), color var(--ease), border-color var(--ease);
+}
+.ft-btn:hover { background:rgba(255,255,255,0.14); color:#fff; border-color:rgba(255,255,255,0.22) }
+.ft-bottom {
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:12px;
+  padding-top:24px; border-top:1px solid rgba(255,255,255,0.07);
+}
+.ft-bottom p, .ft-bottom a { font-size:11.5px; color:rgba(255,255,255,0.28) }
+.ft-bottom a:hover { color:rgba(255,255,255,0.55) }
+.ft-links { display:flex; gap:20px }
+
+/* ═══════════════════════════════════════════════════════════
+   PAGE 1 — HOME
+═══════════════════════════════════════════════════════════ */
+
+/* ── HERO ── */
+.hero {
+  border-bottom:1px solid var(--border);
+  padding:clamp(72px,11vw,140px) 0 0;
+  overflow:hidden;
+}
+.hero-eyebrow {
+  font-size:11px; font-weight:600; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--ink-3);
+  margin-bottom:36px;
+}
+.hero-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(52px,8vw,96px);
+  font-weight:500; line-height:1.04;
+  letter-spacing:-0.025em;
+  color:var(--ink); margin-bottom:36px;
+  max-width:820px;
+}
+.hero-title em { font-style:italic; color:var(--gold) }
+.hero-body {
+  font-size:clamp(15px,1.6vw,17px);
+  color:var(--ink-2); line-height:1.75;
+  max-width:520px; margin-bottom:44px;
+}
+.hero-actions { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:clamp(56px,9vw,112px) }
+.hero-strip {
+  border-top:1px solid var(--border);
+  display:flex; align-items:center; gap:0;
+  padding:0;
+  margin:0 calc(-1 * clamp(20px,5vw,56px));
+}
+.hero-strip-item {
+  flex:1; padding:18px clamp(20px,3vw,40px);
+  font-size:12px; font-weight:500; letter-spacing:0.04em;
+  color:var(--ink-3); border-right:1px solid var(--border);
+  text-align:center;
+}
+.hero-strip-item:last-child { border-right:none }
+.hero-strip-item strong {
+  display:block;
+  font-family:'Playfair Display',serif;
+  font-size:26px; font-weight:500; color:var(--gold);
+  letter-spacing:-0.02em; margin-bottom:3px;
+}
+
+/* ── STATEMENT STRIP ── */
+.statement-strip {
+  background:var(--ink); padding:clamp(40px,6vw,72px) 0;
+}
+.statement-text {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,3.5vw,42px);
+  font-style:italic; font-weight:400;
+  color:rgba(255,255,255,0.92);
+  line-height:1.3; text-align:center;
+  max-width:760px; margin:0 auto;
+}
+.statement-text strong {
+  font-style:normal; font-weight:600; color:#fff;
+}
+
+/* ── PROBLEM ── */
+.problem {
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:clamp(72px,10vw,128px) 0;
+}
+.prob-inner {
+  display:grid; grid-template-columns:5fr 6fr;
+  gap:clamp(48px,7vw,96px); align-items:start;
+}
+.prob-left {}
+.prob-left .rule { margin-bottom:28px }
+.prob-left h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,3.5vw,44px);
+  font-weight:500; line-height:1.1;
+  letter-spacing:-0.015em; margin-bottom:24px;
+}
+.prob-left p {
+  font-size:15px; color:var(--ink-2);
+  line-height:1.78; margin-bottom:16px;
+}
+.prob-left p:last-of-type { margin-bottom:32px }
+.prob-right {}
+.diag-list { display:flex; flex-direction:column; gap:0 }
+.diag-item {
+  padding:22px 0;
+  border-bottom:1px solid var(--border);
+}
+.diag-item:first-child { padding-top:0 }
+.diag-item:last-child { border-bottom:none; padding-bottom:0 }
+.diag-item h4 {
+  font-size:14.5px; font-weight:600; color:var(--ink);
+  margin-bottom:5px; line-height:1.3;
+}
+.diag-item p { font-size:13.5px; color:var(--ink-2); line-height:1.65 }
+
+/* ── SOLUTION OVERVIEW ── */
+.solution {
+  background:var(--cream);
+  border-bottom:1px solid var(--border);
+  padding:clamp(72px,10vw,128px) 0;
+}
+.sol-header { margin-bottom:clamp(40px,5vw,64px) }
+.sol-header .rule { margin-bottom:24px }
+.sol-header h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,3.5vw,42px);
+  font-weight:500; line-height:1.12;
+  letter-spacing:-0.015em; margin-bottom:14px;
+}
+.sol-header p {
+  font-size:15.5px; color:var(--ink-2);
+  line-height:1.72; max-width:520px;
+}
+.sol-list { border-top:1px solid var(--border) }
+.sol-row {
+  display:grid;
+  grid-template-columns:72px 1fr auto;
+  gap:24px; align-items:center;
+  padding:clamp(24px,3vw,36px) 0;
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
+  transition:background var(--ease);
+  margin:0 calc(-1 * clamp(20px,5vw,56px));
+  padding-left:clamp(20px,5vw,56px);
+  padding-right:clamp(20px,5vw,56px);
+}
+.sol-row:hover { background:rgba(176,122,24,0.04) }
+.sol-row-num {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,2.5vw,32px); font-weight:400; font-style:italic;
+  color:var(--ink-4); line-height:1;
+}
+.sol-row-body {}
+.sol-row-body h3 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(17px,2vw,22px); font-weight:500;
+  color:var(--ink); margin-bottom:4px; line-height:1.2;
+}
+.sol-row-body p { font-size:13.5px; color:var(--ink-2); line-height:1.5 }
+.sol-row-arrow {
+  font-size:18px; color:var(--ink-4);
+  transition:transform var(--ease), color var(--ease);
+}
+.sol-row:hover .sol-row-arrow { transform:translateX(4px); color:var(--gold) }
+
+/* ═══════════════════════════════════════════════════════════
+   PAGE 2 — SERVICES
+═══════════════════════════════════════════════════════════ */
+.svc-header {
+  background:var(--white); border-bottom:1px solid var(--border);
+  padding:clamp(52px,8vw,100px) 0 clamp(40px,5vw,64px);
+}
+.svc-header .rule { margin-bottom:22px }
+.svc-header h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(30px,4.5vw,56px); font-weight:500;
+  line-height:1.08; letter-spacing:-0.02em; margin-bottom:18px;
+}
+.svc-header p {
+  font-size:16px; color:var(--ink-2);
+  line-height:1.72; max-width:540px;
+}
+.svc-pillar {
+  border-bottom:1px solid var(--border);
+  padding:clamp(60px,9vw,108px) 0;
+}
+.svc-pillar:nth-child(even) { background:var(--white) }
+.pillar-inner {
+  display:grid; grid-template-columns:4fr 6fr;
+  gap:clamp(36px,6vw,88px); align-items:start;
+}
+.pillar-meta {}
+.pillar-idx {
+  font-size:10px; font-weight:600; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--ink-4); margin-bottom:20px;
+}
+.pillar-meta h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,2.8vw,34px); font-weight:500;
+  line-height:1.12; margin-bottom:18px; letter-spacing:-0.01em;
+}
+.pillar-meta p {
+  font-size:14.5px; color:var(--ink-2); line-height:1.75;
+}
+.pillar-services { display:flex; flex-direction:column; gap:1px; background:var(--border) }
+.svc-card {
+  background:var(--cream); padding:26px 28px;
+  transition:background var(--ease);
+}
+.svc-card:hover { background:var(--white) }
+.svc-card h3 {
+  font-size:15px; font-weight:600; margin-bottom:8px; color:var(--ink);
+}
+.svc-card p { font-size:13.5px; color:var(--ink-2); line-height:1.7 }
+
+/* ─── SERVICE CTA BANNER ─── */
+.svc-cta {
+  background:var(--ink); padding:clamp(44px,7vw,80px) 0;
+}
+.svc-cta-inner {
+  display:grid; grid-template-columns:1fr auto;
+  gap:40px; align-items:center;
+}
+.svc-cta h3 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(20px,2.8vw,32px); font-weight:500;
+  color:#fff; line-height:1.2; margin-bottom:8px;
+}
+.svc-cta p { font-size:14px; color:rgba(255,255,255,0.5); max-width:480px }
+.btn-ink-light {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--white); color:var(--ink);
+  font-size:13.5px; font-weight:500;
+  padding:13px 26px; border-radius:2px; white-space:nowrap;
+  transition:background var(--ease);
+}
+.btn-ink-light:hover { background:var(--cream-dark) }
+
+/* ═══════════════════════════════════════════════════════════
+   PAGE 3 — TESTIMONIALS
+═══════════════════════════════════════════════════════════ */
+.test-header {
+  background:var(--white); border-bottom:1px solid var(--border);
+  padding:clamp(52px,8vw,100px) 0 clamp(40px,5vw,64px);
+}
+.test-header .rule { margin-bottom:22px }
+.test-header h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(30px,4.5vw,56px); font-weight:500;
+  line-height:1.08; letter-spacing:-0.02em; margin-bottom:16px;
+}
+.test-header p { font-size:16px; color:var(--ink-2); line-height:1.7; max-width:480px }
+.test-body-wrap { padding:clamp(52px,8vw,96px) 0 }
+.test-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1px; background:var(--border);
+  border:1px solid var(--border); border-radius:4px;
+  overflow:hidden; margin-bottom:64px;
+}
+.test-card {
+  background:var(--white); padding:clamp(28px,4vw,44px);
+  display:flex; flex-direction:column;
+  transition:background var(--ease);
+}
+.test-card:hover { background:#FEFCF9 }
+.test-quote-mark {
+  font-family:'Playfair Display',serif;
+  font-size:72px; line-height:0.7; color:var(--cream-dark);
+  margin-bottom:20px; display:block;
+  user-select:none;
+}
+.test-body-text {
+  font-size:14.5px; line-height:1.8; color:var(--ink-2);
+  flex:1; margin-bottom:32px;
+}
+.test-author {
+  padding-top:24px; border-top:1px solid var(--border);
+}
+.test-name {
+  font-size:14px; font-weight:600; color:var(--ink); margin-bottom:3px;
+}
+.test-role { font-size:12px; color:var(--ink-3); letter-spacing:0.01em }
+.trust-row {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  border:1px solid var(--border); border-radius:4px;
+  overflow:hidden; background:var(--white);
+}
+.trust-item {
+  text-align:center; padding:clamp(28px,4vw,44px) 24px;
+  border-right:1px solid var(--border);
+}
+.trust-item:last-child { border-right:none }
+.trust-n {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,3vw,40px); font-weight:500;
+  color:var(--gold); line-height:1; margin-bottom:10px;
+}
+.trust-l { font-size:12px; color:var(--ink-3); line-height:1.5; letter-spacing:0.01em }
+
+/* ═══════════════════════════════════════════════════════════
+   PAGE 4 — FAQ
+═══════════════════════════════════════════════════════════ */
+.faq-header {
+  background:var(--white); border-bottom:1px solid var(--border);
+  padding:clamp(52px,8vw,100px) 0 clamp(40px,5vw,64px);
+}
+.faq-header .rule { margin-bottom:22px }
+.faq-header h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(30px,4.5vw,56px); font-weight:500;
+  line-height:1.08; letter-spacing:-0.02em; margin-bottom:16px;
+}
+.faq-header p { font-size:16px; color:var(--ink-2); line-height:1.7; max-width:480px }
+.faq-body {
+  padding:clamp(52px,8vw,96px) 0;
+  display:grid; grid-template-columns:3fr 2fr; gap:72px; align-items:start;
+}
+.faq-list { display:flex; flex-direction:column }
+.faq-item { border-bottom:1px solid var(--border) }
+.faq-item:first-child { border-top:1px solid var(--border) }
+.faq-q {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:22px 0; width:100%; text-align:left;
+  font-size:15px; font-weight:500; color:var(--ink);
+  cursor:pointer; transition:color var(--ease);
+}
+.faq-q:hover { color:var(--gold) }
+.faq-item.open .faq-q { color:var(--gold) }
+.faq-toggle {
+  width:24px; height:24px; flex-shrink:0;
+  border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  transition:background var(--ease), border-color var(--ease), transform .25s;
+}
+.faq-toggle svg { color:var(--ink-2); transition:color var(--ease) }
+.faq-item.open .faq-toggle {
+  background:var(--gold); border-color:var(--gold); transform:rotate(45deg);
+}
+.faq-item.open .faq-toggle svg { color:#fff }
+.faq-a {
+  display:none; padding:0 0 22px;
+  font-size:14.5px; line-height:1.8; color:var(--ink-2);
+  max-width:600px;
+}
+.faq-item.open .faq-a { display:block }
+.faq-aside {}
+.faq-aside-card {
+  background:var(--ink); border-radius:4px;
+  padding:36px; position:sticky; top:calc(var(--nav-h) + 24px);
+}
+.faq-aside-card h3 {
+  font-family:'Playfair Display',serif;
+  font-size:22px; font-weight:500; color:#fff;
+  line-height:1.25; margin-bottom:14px;
+}
+.faq-aside-card p {
+  font-size:13.5px; color:rgba(255,255,255,0.55);
+  line-height:1.68; margin-bottom:28px;
+}
+.faq-aside-card .btn-gold {
+  width:100%; justify-content:center;
+  padding:14px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PAGE 5 — CONTACT
+═══════════════════════════════════════════════════════════ */
+.con-header {
+  background:var(--white); border-bottom:1px solid var(--border);
+  padding:clamp(52px,8vw,100px) 0 clamp(40px,5vw,64px);
+}
+.con-header .rule { margin-bottom:22px }
+.con-header h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(30px,4.5vw,56px); font-weight:500;
+  line-height:1.08; letter-spacing:-0.02em; margin-bottom:16px;
+}
+.con-header p { font-size:16px; color:var(--ink-2); line-height:1.7; max-width:520px }
+.con-body { padding:clamp(52px,8vw,96px) 0 }
+.con-grid {
+  display:grid; grid-template-columns:1fr 1.8fr;
+  gap:clamp(40px,5vw,72px); align-items:start;
+}
+.con-info h3 {
+  font-family:'Playfair Display',serif;
+  font-size:22px; font-weight:500; margin-bottom:16px;
+}
+.con-info p { font-size:14.5px; color:var(--ink-2); line-height:1.75; margin-bottom:32px }
+.con-detail {
+  display:flex; align-items:center; gap:14px;
+  font-size:13.5px; color:var(--ink-2); margin-bottom:14px;
+}
+.con-detail-dot {
+  width:5px; height:5px; border-radius:50%;
+  background:var(--gold); flex-shrink:0;
+}
+.con-promise {
+  margin-top:32px; padding:20px;
+  border-left:2px solid var(--gold);
+  font-size:13px; color:var(--ink-3); line-height:1.7;
+  font-style:italic;
+}
+.cal-wrap {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:4px; overflow:hidden;
+  box-shadow:var(--shadow-md); min-height:640px;
+}
+.cal-wrap .calendly-inline-widget {
+  min-width:320px; width:100%; height:700px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PAGE 6 — ABOUT
+═══════════════════════════════════════════════════════════ */
+.ab-header {
+  background:var(--white); border-bottom:1px solid var(--border);
+  padding:clamp(52px,8vw,100px) 0;
+}
+.ab-hero-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:clamp(48px,7vw,96px); align-items:center;
+}
+.ab-hero-text .rule { margin-bottom:24px }
+.ab-hero-text h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,4vw,52px); font-weight:500;
+  line-height:1.08; letter-spacing:-0.02em; margin-bottom:22px;
+}
+.ab-hero-text p {
+  font-size:15.5px; color:var(--ink-2); line-height:1.75;
+}
+.ab-quote-block {
+  background:var(--cream); border:1px solid var(--border);
+  border-radius:4px; padding:clamp(36px,5vw,56px);
+}
+.ab-quote-block blockquote {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(18px,2.2vw,26px); font-style:italic;
+  font-weight:400; color:var(--ink); line-height:1.45;
+  margin-bottom:24px;
+}
+.ab-quote-block cite {
+  font-size:12px; font-style:normal; color:var(--ink-3);
+  letter-spacing:0.06em; text-transform:uppercase;
+}
+.ab-body { padding:clamp(60px,9vw,108px) 0 }
+.ab-content {
+  display:grid; grid-template-columns:5fr 3fr;
+  gap:clamp(48px,6vw,88px); align-items:start;
+}
+.ab-text .rule { margin-bottom:24px }
+.ab-text h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,2.8vw,32px); font-weight:500;
+  line-height:1.15; margin-bottom:22px; letter-spacing:-0.01em;
+}
+.ab-text p {
+  font-size:15px; color:var(--ink-2); line-height:1.8; margin-bottom:18px;
+}
+.ab-sidebar {}
+.ab-value {
+  padding:22px 0; border-bottom:1px solid var(--border);
+}
+.ab-value:first-child { padding-top:0 }
+.ab-value:last-child { border-bottom:none; padding-bottom:0 }
+.ab-value h4 {
+  font-size:14px; font-weight:600; color:var(--ink);
+  margin-bottom:6px;
+}
+.ab-value p {
+  font-size:13px; color:var(--ink-2); line-height:1.65;
+}
+.ab-cta {
+  background:var(--ink); padding:clamp(44px,7vw,88px) 0;
+}
+.ab-cta-inner { text-align:center }
+.ab-cta h3 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(24px,3.5vw,44px); font-weight:500;
+  color:#fff; line-height:1.15; margin-bottom:16px;
+  letter-spacing:-0.01em;
+}
+.ab-cta p {
+  font-size:15px; color:rgba(255,255,255,0.5);
+  margin-bottom:32px; line-height:1.65; max-width:440px; margin-left:auto; margin-right:auto;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media(max-width:960px) {
+  .nav-links, .nav-cta { display:none }
+  .hamburger { display:flex }
+  .prob-inner { grid-template-columns:1fr }
+  .pillar-inner { grid-template-columns:1fr }
+  .faq-body { grid-template-columns:1fr }
+  .faq-aside { display:none }
+  .con-grid { grid-template-columns:1fr }
+  .ft-grid { grid-template-columns:1fr 1fr; gap:32px }
+  .ab-hero-grid { grid-template-columns:1fr }
+  .ab-content { grid-template-columns:1fr }
+  .svc-cta-inner { grid-template-columns:1fr; gap:24px }
+  .trust-row { grid-template-columns:1fr 1fr }
+  .trust-item { border-right:1px solid var(--border); border-bottom:1px solid var(--border) }
+  .trust-item:nth-child(2) { border-right:none }
+  .trust-item:nth-child(3) { border-bottom:none }
+  .trust-item:last-child { border-right:none; border-bottom:none }
+  .sol-row { grid-template-columns:48px 1fr auto }
+}
+@media(max-width:680px) {
+  .test-grid { grid-template-columns:1fr }
+  .trust-row { grid-template-columns:1fr 1fr }
+  .hero-strip { flex-direction:column }
+  .hero-strip-item { width:100%; border-right:none; border-bottom:1px solid var(--border) }
+  .hero-strip-item:last-child { border-bottom:none }
+  .hero-actions { flex-direction:column }
+  .hero-actions .btn { justify-content:center }
+  .ft-grid { grid-template-columns:1fr; gap:28px }
+}
+@media(max-width:480px) {
+  .sol-row-num { font-size:20px }
+}
+
+/* ─── ANIMATIONS ─────────────────────────────────────────── */
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.001ms!important;
+    transition-duration:.001ms!important;
+  }
+  .reveal { opacity:1; transform:none }
+}
+
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ NAVIGATION ════════════════ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-logo" onclick="navigate('home')" role="button" tabindex="0"
+       aria-label="Tandem Operations — home"
+       onkeydown="if(event.key==='Enter')navigate('home')">
+    <span class="wordmark">Tandem Operations</span>
+    <span class="tagline">Operations Consulting · Toronto</span>
+  </div>
+  <div class="nav-links" role="list">
+    <a href="#home"         class="nav-a" data-page="home"         role="listitem">Home</a>
+    <a href="#services"     class="nav-a" data-page="services"     role="listitem">Services</a>
+    <a href="#testimonials" class="nav-a" data-page="testimonials" role="listitem">Results</a>
+    <a href="#faq"          class="nav-a" data-page="faq"          role="listitem">FAQs</a>
+    <a href="#contact"      class="nav-a" data-page="contact"      role="listitem">Contact</a>
+    <a href="#about"        class="nav-a" data-page="about"        role="listitem">About</a>
+  </div>
+  <a href="https://calendly.com/alexmercer0307/30min" target="_blank" rel="noopener"
+     class="nav-cta" aria-label="Book a free 30-minute strategy call">Book a Call</a>
+  <button class="hamburger" id="ham" aria-label="Toggle mobile menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mob-menu" id="mobMenu" role="navigation" aria-label="Mobile navigation">
+  <a href="#home"         class="nav-a mob-a" data-page="home">Home</a>
+  <a href="#services"     class="nav-a mob-a" data-page="services">Services</a>
+  <a href="#testimonials" class="nav-a mob-a" data-page="testimonials">Results</a>
+  <a href="#faq"          class="nav-a mob-a" data-page="faq">FAQs</a>
+  <a href="#contact"      class="nav-a mob-a" data-page="contact">Contact</a>
+  <a href="#about"        class="nav-a mob-a" data-page="about">About</a>
+  <a href="https://calendly.com/alexmercer0307/30min" target="_blank" rel="noopener"
+     class="mob-cta">Book a Free Call &rarr;</a>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 1 — HOME
+════════════════════════════════════════════════════════ -->
+<main id="page-home" class="page active" role="main">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="hero-eyebrow reveal">Operations Consulting &mdash; Toronto, Ontario</p>
+      <h1 class="hero-title serif reveal reveal-delay-1">
+        Stop running<br>your business.<br>
+        <em>Start building it.</em>
+      </h1>
+      <p class="hero-body reveal reveal-delay-2">
+        Most small business owners are working harder than they ever expected — and still
+        falling behind. The problem isn't effort. It's that the operational infrastructure
+        isn't there yet. Tandem Operations builds it.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="https://calendly.com/alexmercer0307/30min" target="_blank" rel="noopener"
+           class="btn btn-solid" aria-label="Book a free strategy call">
+          Book a Free Strategy Call
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <button class="btn btn-outline" onclick="navigate('services')" aria-label="See our services">
+          See What We Build
+        </button>
+      </div>
+      <div class="hero-strip reveal reveal-delay-4" aria-hidden="true">
+        <div class="hero-strip-item">
+          <strong>30</strong>
+          Days to measurable results
+        </div>
+        <div class="hero-strip-item">
+          <strong>4</strong>
+          Core service areas
+        </div>
+        <div class="hero-strip-item">
+          <strong>100%</strong>
+          Custom-built for your business
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statement Strip -->
+  <section class="statement-strip" aria-hidden="true">
+    <div class="wrap">
+      <p class="statement-text">
+        We don't give advice. <strong>We build the infrastructure.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="problem" id="home-problem">
+    <div class="wrap">
+      <div class="prob-inner">
+        <div class="prob-left">
+          <div class="rule reveal"></div>
+          <h2 class="serif reveal reveal-delay-1">The bottleneck most owners don't see.</h2>
+          <p class="reveal reveal-delay-2">You didn't start a business to spend your days chasing calls, juggling bookings, and guessing at performance. But that's where most owners end up — buried in back-end work with no visibility and no bandwidth to grow.</p>
+          <p class="reveal reveal-delay-3">The issue isn't effort. It's infrastructure. The systems aren't there, so everything flows through you — and the business can't scale until that changes.</p>
+          <a href="https://calendly.com/alexmercer0307/30min" target="_blank" rel="noopener"
+             class="btn-text reveal reveal-delay-4" aria-label="Book a call to discuss your situation">
+            Let's talk about your situation
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="prob-right">
+          <ul class="diag-list" role="list">
+            <li class="diag-item reveal" role="listitem">
+              <h4>Missed calls and lost leads</h4>
+              <p>Every unanswered inquiry is revenue walking out the door — and it's happening more than you think.</p>
+            </li>
+            <li class="diag-item reveal reveal-delay-1" role="listitem">
+              <h4>Decisions made without data</h4>
+              <p>No real-time visibility means you're guessing. Your competitors aren't.</p>
+            </li>
+            <li class="diag-item reveal reveal-delay-2" role="listitem">
+              <h4>Invisible online presence</h4>
+              <p>While you're focused on running the business, competitors are dominating local search.</p>
+            </li>
+            <li class="diag-item reveal reveal-delay-3" role="listitem">
+              <h4>You are the bottleneck</h4>
+              <p>Every decision flows through you. Until that changes, the ceiling is low.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution Overview -->
+  <section class="solution" id="home-solution">
+    <div class="wrap">
+      <div class="sol-header">
+        <div class="rule reveal"></div>
+        <h2 class="serif reveal reveal-delay-1">Four areas. One system.</h2>
+        <p class="reveal reveal-delay-2">We don't give you advice. We build and deploy the actual infrastructure — customised to your business. Every solution starts with your specific problem, not a preset package.</p>
+      </div>
+      <div class="sol-list reveal" role="list">
+        <div class="sol-row" role="listitem" onclick="navigate('services')" tabindex="0"
+             aria-label="Learn about Communication services"
+             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('services')}">
+          <span class="sol-row-num serif" aria-hidden="true">01</span>
+          <div class="sol-row-body">
+            <h3 class="serif">Communication</h3>
+            <p>AI-powered systems that handle every inbound inquiry and keep customers engaged — around the clock.</p>
+          </div>
+          <span class="sol-row-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="sol-row" role="listitem" onclick="navigate('services')" tabindex="0"
+             aria-label="Learn about Operations services"
+             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('services')}">
+          <span class="sol-row-num serif" aria-hidden="true">02</span>
+          <div class="sol-row-body">
+            <h3 class="serif">Operations</h3>
+            <p>Operational analysis and intelligent automation that eliminates inefficiencies and frees you to lead.</p>
+          </div>
+          <span class="sol-row-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="sol-row" role="listitem" onclick="navigate('services')" tabindex="0"
+             aria-label="Learn about Business Intelligence services"
+             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('services')}">
+          <span class="sol-row-num serif" aria-hidden="true">03</span>
+          <div class="sol-row-body">
+            <h3 class="serif">Business Intelligence</h3>
+            <p>Real-time visibility into your performance and competitive landscape — so every decision is grounded.</p>
+          </div>
+          <span class="sol-row-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="sol-row" role="listitem" onclick="navigate('services')" tabindex="0"
+             aria-label="Learn about Marketing services"
+             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('services')}">
+          <span class="sol-row-num serif" aria-hidden="true">04</span>
+          <div class="sol-row-body">
+            <h3 class="serif">Marketing</h3>
+            <p>Strategic systems that build your brand, drive local search, and turn visibility into revenue.</p>
+          </div>
+          <span class="sol-row-arrow" aria-hidden="true">→</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ft-placeholder"></div>
+</main>
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 2 — SERVICES
+════════════════════════════════════════════════════════ -->
+<div id="page-services" class="page" aria-label="Services">
+  <header class="svc-header">
+    <div class="wrap">
+      <div class="rule reveal"></div>
+      <h1 class="serif reveal reveal-delay-1">What we build.</h1>
+      <p class="reveal reveal-delay-2">Every service starts with a problem — not a product. We identify what's costing you the most time and revenue, then build the system that fixes it.</p>
+    </div>
+  </header>
+
+  <!-- Pillar 1: Communication -->
+  <section class="svc-pillar">
+    <div class="wrap">
+      <div class="pillar-inner">
+        <div class="pillar-meta">
+          <div class="pillar-idx reveal">01 &mdash; Communication</div>
+          <h2 class="serif reveal reveal-delay-1">You're losing revenue every time a call goes unanswered.</h2>
+          <p class="reveal reveal-delay-2">If your business can't respond instantly — 24 hours a day — you're leaking revenue every single day. We build communication infrastructure that means no lead ever falls through the cracks again, at any hour.</p>
+        </div>
+        <div class="pillar-services">
+          <div class="svc-card reveal">
+            <h3>AI Call Agent</h3>
+            <p>Your phone gets answered 24/7 — it books appointments, handles common questions, and escalates to you only when it matters. Missed calls become a thing of the past.</p>
+          </div>
+          <div class="svc-card reveal reveal-delay-1">
+            <h3>AI Web Assistant</h3>
+            <p>Visitors leave when questions go unanswered. A smart assistant embedded on your site responds instantly, qualifies leads, and captures contact details before they bounce.</p>
+          </div>
+          <div class="svc-card reveal reveal-delay-2">
+            <h3>SMS Follow-Up &amp; Reactivation</h3>
+            <p>Automated sequences follow up with new leads and re-engage past customers on your behalf — so your pipeline keeps filling without you lifting a finger.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pillar 2: Operations -->
+  <section class="svc-pillar">
+    <div class="wrap">
+      <div class="pillar-inner">
+        <div class="pillar-meta">
+          <div class="pillar-idx reveal">02 &mdash; Operations</div>
+          <h2 class="serif reveal reveal-delay-1">If it only works when you're working, it's not a business yet.</h2>
+          <p class="reveal reveal-delay-2">When every decision and task flows through you, growth has a hard limit. We find the exact operational bottlenecks costing you time and money, then build intelligent systems that eliminate them.</p>
+        </div>
+        <div class="pillar-services">
+          <div class="svc-card reveal">
+            <h3>Scheduling &amp; Calendar Automation</h3>
+            <p>Intelligent booking management that handles everything automatically — no more double-bookings, no-shows, or time spent coordinating. Your calendar runs itself.</p>
+          </div>
+          <div class="svc-card reveal reveal-delay-1">
+            <h3>Operational Analysis</h3>
+            <p>You can't fix what you can't see. We conduct a deep dive into your workflows to identify exactly where you're losing time and money — then build systems to close those gaps permanently.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pillar 3: Business Intelligence -->
+  <section class="svc-pillar">
+    <div class="wrap">
+      <div class="pillar-inner">
+        <div class="pillar-meta">
+          <div class="pillar-idx reveal">03 &mdash; Business Intelligence</div>
+          <h2 class="serif reveal reveal-delay-1">Your competitors are using data. You're using instinct.</h2>
+          <p class="reveal reveal-delay-2">Decisions made on gut feel lead to wasted spend and missed opportunities. We give you real-time visibility into your own performance and competitive landscape so every move is strategic.</p>
+        </div>
+        <div class="pillar-services">
+          <div class="svc-card reveal">
+            <h3>Competitor Analysis &amp; Market Audit</h3>
+            <p>Know exactly where your competitors are weak and where your market has gaps. A complete picture of your competitive landscape — so you know where to position and where to win.</p>
+          </div>
+          <div class="svc-card reveal reveal-delay-1">
+            <h3>Dashboard Management</h3>
+            <p>All your key numbers — revenue, leads, performance — in one unified, real-time view. No more hunting across spreadsheets. The information you need, when you need it.</p>
+          </div>
+          <div class="svc-card reveal reveal-delay-2">
+            <h3>Website Optimisation</h3>
+            <p>Your website is either converting customers or costing you them. We analyse performance and redesign for conversion — turning your site into a reliable lead source.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pillar 4: Marketing -->
+  <section class="svc-pillar">
+    <div class="wrap">
+      <div class="pillar-inner">
+        <div class="pillar-meta">
+          <div class="pillar-idx reveal">04 &mdash; Marketing</div>
+          <h2 class="serif reveal reveal-delay-1">Your ideal customers can't hire you if they can't find you.</h2>
+          <p class="reveal reveal-delay-2">We build strategic marketing systems that put your business in front of the right customers at the right moment — making you the obvious choice before the conversation even starts.</p>
+        </div>
+        <div class="pillar-services">
+          <div class="svc-card reveal">
+            <h3>Content Personalisation</h3>
+            <p>Generic content blends into the noise. We build content systems that speak directly to your ideal customer's problems and motivations — at scale, on brand, consistently.</p>
+          </div>
+          <div class="svc-card reveal reveal-delay-1">
+            <h3>SEO Optimisation</h3>
+            <p>Intentional, data-driven local SEO that puts your business at the top when your ideal customer is searching — and keeps you there as your competitors try to catch up.</p>
+          </div>
+          <div class="svc-card reveal reveal-delay-2">
+            <h3>Brand Management</h3>
+            <p>Your brand either positions you as the obvious choice or it's working against you. We analyse and optimise your positioning and digital presence so you stand out and command trust.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="svc-cta">
+    <div class="wrap">
+      <div class="svc-cta-inner">
+        <div>
+          <h3 class="serif">Not sure which services fit?</h3>
+          <p>Book a free call. We'll identify your biggest bottlenecks and recommend exactly what will have the highest impact — no obligation.</p>
+        </div>
+        <a href="https://calendly.com/alexmercer0307/30min" target="_blank" rel="noopener"
+           class="btn-ink-light" aria-label="Book a free strategy call">
+          Book a Free Strategy Call
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft-placeholder"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 3 — TESTIMONIALS
+════════════════════════════════════════════════════════ -->
+<div id="page-testimonials" class="page" aria-label="Client results">
+  <header class="test-header">
+    <div class="wrap">
+      <div class="rule reveal"></div>
+      <h1 class="serif reveal reveal-delay-1">Real owners. Real results.</h1>
+      <p class="reveal reveal-delay-2">Small business owners across Toronto and Ontario are reclaiming their time and growing their operations with Tandem.</p>
+    </div>
+  </header>
+  <div class="test-body-wrap">
+    <div class="wrap">
+      <div class="test-grid">
+        <article class="test-card reveal">
+          <span class="test-quote-mark serif" aria-hidden="true">&ldquo;</span>
+          <p class="test-body-text">Within weeks of deploying the call agent, our booking rate increased significantly and we stopped missing leads entirely. The system handles everything around the clock — it's been a complete game changer for the operation.</p>
+          <footer class="test-author">
+            <div class="test-name">Marcus</div>
+            <div class="test-role">Owner &mdash; Automotive Industry, Toronto&nbsp;ON</div>
+          </footer>
+        </article>
+        <article class="test-card reveal reveal-delay-1">
+          <span class="test-quote-mark serif" aria-hidden="true">&ldquo;</span>
+          <p class="test-body-text">I was spending hours every day on scheduling and follow-ups. Tandem automated the entire process. Now my calendar manages itself, no-shows are down significantly, and I'm finally focused on growing the business instead of just running it.</p>
+          <footer class="test-author">
+            <div class="test-name">Sandra</div>
+            <div class="test-role">Founder &mdash; Health &amp; Wellness, Toronto&nbsp;ON</div>
+          </footer>
+        </article>
+        <article class="test-card reveal reveal-delay-2">
+          <span class="test-quote-mark serif" aria-hidden="true">&ldquo;</span>
+          <p class="test-body-text">The competitor analysis alone was worth every dollar. Tandem identified gaps in our market positioning that we'd completely overlooked. Combined with the SEO work, we've seen a real and sustained increase in qualified inbound leads.</p>
+          <footer class="test-author">
+            <div class="test-name">David</div>
+            <div class="test-role">CEO &mdash; Contracting &amp; Trades, Toronto&nbsp;ON</div>
+          </footer>
+        </article>
+      </div>
+      <div class="trust-row reveal" role="list" aria-label="Key metrics">
+        <div class="trust-item" role="listitem">
+          <div class="trust-n serif">30</div>
+          <div class="trust-l">Days to first results</div>
+        </div>
+        <div class="trust-item" role="listitem">
+          <div class="trust-n serif">4</div>
+          <div class="trust-l">Service areas</div>
+        </div>
+        <div class="trust-item" role="listitem">
+          <div class="trust-n serif">100%</div>
+          <div class="trust-l">Custom-built</div>
+        </div>
+        <div class="trust-item" role="listitem">
+          <div class="trust-n serif">24/7</div>
+          <div class="trust-l">Operational coverage</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ft-placeholder"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 4 — FAQs
+════════════════════════════════════════════════════════ -->
+<div id="page-faq" class="page" aria-label="Frequently asked questions">
+  <header class="faq-header">
+    <div class="wrap">
+      <div class="rule reveal"></div>
+      <h1 class="serif reveal reveal-delay-1">Common questions.</h1>
+      <p class="reveal reveal-delay-2">Everything worth knowing before we talk.</p>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="faq-body">
+      <div class="faq-list" role="list">
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            How quickly will I see results?
+            <span class="faq-toggle" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">Many clients see measurable results within the first 30 days — particularly in communication (reduced missed calls, improved booking rates) and scheduling efficiency. Deeper improvements in SEO, brand positioning, and operational analysis typically compound over 3–6 months. We set clear milestones from day one so you always know what to expect.</div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            Do I need to be tech-savvy?
+            <span class="faq-toggle" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">Not at all. Our systems are designed to run in the background without requiring technical knowledge from you or your team. We handle the setup, integration, and ongoing management. You simply experience the results.</div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            What makes Tandem Operations different?
+            <span class="faq-toggle" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">Most consultants give you a report and leave. We build and deploy the actual systems. We combine strategic thinking with hands-on implementation — so you get working infrastructure, not just advice. Every solution is built specifically for your business.</div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            How does the engagement process work?
+            <span class="faq-toggle" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">It starts with a free 30-minute strategy call where we learn about your business, identify your biggest bottlenecks, and determine which services will deliver the highest impact. From there we propose a tailored engagement plan — specific to your business, not a menu of preset packages.</div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            Can I start with one service and expand later?
+            <span class="faq-toggle" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">Absolutely. We identify where you'll see the highest impact first and build from there. Many clients begin with communication or operations tools and expand into business intelligence and marketing as results come in. You can add services at any time.</div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            Is my business data secure?
+            <span class="faq-toggle" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">Yes. Data security and client confidentiality are foundational to how we operate. All systems are built with industry-standard security protocols and we never share client information with third parties. Our Privacy Policy and Terms of Service outline our full data handling practices.</div>
+        </div>
+      </div>
+      <aside class="faq-aside" aria-label="Book a call">
+        <div class="faq-aside-card">
+          <h3 class="serif">Still have questions?</h3>
+          <p>Book a free 30-minute call and we'll answer everything specific to your business — no obligation.</p>
+          <a href="https://calendly.com/alexmercer0307/30min" target="_blank" rel="noopener"
+             class="btn btn-gold" aria-label="Book a free strategy call">
+            Book a Free Call
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <div class="ft-placeholder"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 5 — CONTACT
+════════════════════════════════════════════════════════ -->
+<div id="page-contact" class="page" aria-label="Book a call">
+  <header class="con-header">
+    <div class="wrap">
+      <div class="rule reveal"></div>
+      <h1 class="serif reveal reveal-delay-1">Let's talk about your business.</h1>
+      <p class="reveal reveal-delay-2">Pick a time that works for you. In 30 minutes we'll identify your biggest bottlenecks and map out which systems will have the highest impact — at no cost, no commitment.</p>
+    </div>
+  </header>
+  <div class="con-body">
+    <div class="wrap">
+      <div class="con-grid">
+        <div class="con-info">
+          <h3 class="serif">What to expect</h3>
+          <p>This is a straightforward conversation about your business — not a sales pitch. We'll ask about your operations, identify what's costing you the most, and give you an honest picture of what's possible.</p>
+          <div class="con-detail">
+            <span class="con-detail-dot" aria-hidden="true"></span>
+            30-minute strategy session
+          </div>
+          <div class="con-detail">
+            <span class="con-detail-dot" aria-hidden="true"></span>
+            Available via video call
+          </div>
+          <div class="con-detail">
+            <span class="con-detail-dot" aria-hidden="true"></span>
+            No cost, no commitment
+          </div>
+          <div class="con-promise">
+            "No spam. No pressure. Just a straightforward conversation about whether we're the right fit for your business."
+          </div>
+        </div>
+        <div class="cal-wrap">
+          <div class="calendly-inline-widget"
+               data-url="https://calendly.com/alexmercer0307/30min?hide_gdpr_banner=1&primary_color=b07a18"
+               aria-label="Calendly booking widget — book a free strategy call">
+          </div>
+          <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ft-placeholder"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 6 — ABOUT
+════════════════════════════════════════════════════════ -->
+<div id="page-about" class="page" aria-label="About Tandem Operations">
+  <header class="ab-header">
+    <div class="wrap">
+      <div class="ab-hero-grid">
+        <div class="ab-hero-text">
+          <div class="rule reveal"></div>
+          <h1 class="serif reveal reveal-delay-1">Built on one principle:<br>build it, don't just advise it.</h1>
+          <p class="reveal reveal-delay-2">Tandem Operations was founded on a simple observation — small businesses were struggling with the same operational problems that larger companies had already solved. We set out to close that gap.</p>
+        </div>
+        <div class="ab-quote-block reveal reveal-delay-2">
+          <blockquote>
+            &ldquo;The infrastructure that solves these problems exists. Larger businesses use it as a matter of course. We bring it to small businesses — without the enterprise price tag or the enterprise complexity.&rdquo;
+          </blockquote>
+          <cite>Tandem Operations &mdash; Toronto, ON</cite>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="ab-body">
+    <div class="wrap">
+      <div class="ab-content">
+        <div class="ab-text">
+          <div class="rule reveal"></div>
+          <h2 class="serif reveal reveal-delay-1">Why Tandem Operations exists.</h2>
+          <p class="reveal reveal-delay-2">Most small business owners didn't start their business to spend their days chasing calls, manually booking appointments, or guessing at performance. But that's where most end up — buried in back-end work with no time to grow what they built.</p>
+          <p class="reveal reveal-delay-3">The operational infrastructure that solves this problem exists. Larger businesses use it as a matter of course. But for small businesses, it's always been either too expensive, too complex, or presented in a way that doesn't actually fit how a 10-person company operates.</p>
+          <p class="reveal">Tandem Operations was built to change that. We work with business owners who are ready to stop firefighting and start building — and we stay involved until it's working, not just until the project is done.</p>
+          <p class="reveal">Our work sits at the intersection of strategy and hands-on implementation. We spend time understanding how your business actually operates, where the friction is, and what's costing the most. Then we build the systems that remove it.</p>
+          <p class="reveal">Based in Toronto, we work with small businesses across industries — from trades and automotive to health and wellness. If you have the ambition and the business, we'll build the infrastructure.</p>
+          <div style="margin-top:36px" class="reveal">
+            <a href="https://calendly.com/alexmercer0307/30min" target="_blank" rel="noopener"
+               class="btn btn-solid" aria-label="Book a free strategy call">
+              Start the conversation
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <aside class="ab-sidebar reveal" aria-label="Our principles">
+          <div class="ab-value">
+            <h4>We build, not just advise.</h4>
+            <p>Strategy without execution is conversation. We deliver working systems, not reports that sit in a drawer.</p>
+          </div>
+          <div class="ab-value">
+            <h4>Problems first. Tools second.</h4>
+            <p>We start with your specific situation. The solution follows. We don't sell tools looking for a problem to justify them.</p>
+          </div>
+          <div class="ab-value">
+            <h4>Nothing generic.</h4>
+            <p>Every engagement is built around your business. No templates. No packages forced to fit what you actually need.</p>
+          </div>
+          <div class="ab-value">
+            <h4>Results you can measure.</h4>
+            <p>We set clear milestones from day one. If something isn't moving the needle, we identify it and fix it.</p>
+          </div>
+          <div class="ab-value">
+            <h4>A long-term partner.</h4>
+            <p>We're not here for a one-time project. We stay involved as your business evolves and your needs grow.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="ab-cta">
+    <div class="wrap">
+      <div class="ab-cta-inner">
+        <h3 class="serif">Ready to build the business<br>you intended to build?</h3>
+        <p>Book a free 30-minute call. We'll be direct about what's possible for your specific situation.</p>
+        <a href="https://calendly.com/alexmercer0307/30min" target="_blank" rel="noopener"
+           class="btn btn-ink-light" aria-label="Book a free strategy call">
+          Book a Free Strategy Call
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft-placeholder"></div>
+</div>
+
+<!-- ════════ FOOTER TEMPLATE ════════ -->
+<template id="ft-tpl">
+  <footer class="ft" role="contentinfo">
+    <div class="wrap">
+      <div class="ft-grid">
+        <div class="ft-brand">
+          <div class="wordmark">Tandem Operations</div>
+          <p>Operational infrastructure for small businesses that are ready to grow. Based in Toronto, Ontario.</p>
+        </div>
+        <div class="ft-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#home"         data-page="home"         class="ft-a">Home</a></li>
+            <li><a href="#services"     data-page="services"     class="ft-a">Services</a></li>
+            <li><a href="#testimonials" data-page="testimonials" class="ft-a">Results</a></li>
+            <li><a href="#faq"          data-page="faq"          class="ft-a">FAQs</a></li>
+            <li><a href="#contact"      data-page="contact"      class="ft-a">Contact</a></li>
+            <li><a href="#about"        data-page="about"        class="ft-a">About</a></li>
+          </ul>
+        </div>
+        <div class="ft-col ft-col-cta">
+          <h4>Get Started</h4>
+          <p>Book a free 30-minute strategy call. No obligation, no pitch.</p>
+          <a href="https://calendly.com/alexmercer0307/30min" target="_blank" rel="noopener"
+             class="ft-btn" aria-label="Book a free call">
+            Book a Call
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="ft-bottom">
+        <p>&copy; 2026 Tandem Operations. All rights reserved.</p>
+        <div class="ft-links">
+          <a href="https://ajbconsulting.manus.space/terms">Terms of Service</a>
+          <a href="https://ajbconsulting.manus.space/privacy">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<script>
+/* ─── ROUTER ─────────────────────────────────────────── */
+const PAGES = ['home','services','testimonials','faq','contact','about'];
+
+function navigate(id) {
+  if (!PAGES.includes(id)) id = 'home';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pg = document.getElementById('page-' + id);
+  if (pg) {
+    pg.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    // Re-trigger reveal animations for newly shown page
+    setTimeout(() => initReveal(), 50);
+  }
+  document.querySelectorAll('.nav-a').forEach(a => a.classList.toggle('active', a.dataset.page === id));
+  history.pushState({ page: id }, '', '#' + id);
+  closeMob();
+}
+
+function routeFromHash() {
+  const h = window.location.hash.replace('#','');
+  navigate(PAGES.includes(h) ? h : 'home');
+}
+window.addEventListener('popstate', routeFromHash);
+
+/* ─── LINK DELEGATION ────────────────────────────────── */
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-page]');
+  if (a?.dataset?.page) { e.preventDefault(); navigate(a.dataset.page); }
+});
+
+/* ─── HAMBURGER ──────────────────────────────────────── */
+const ham = document.getElementById('ham');
+const mob = document.getElementById('mobMenu');
+function closeMob() {
+  ham.classList.remove('open'); mob.classList.remove('open');
+  ham.setAttribute('aria-expanded', 'false');
+}
+ham.addEventListener('click', () => {
+  const o = !mob.classList.contains('open');
+  ham.classList.toggle('open', o); mob.classList.toggle('open', o);
+  ham.setAttribute('aria-expanded', String(o));
+});
+
+/* ─── FOOTER INJECT ──────────────────────────────────── */
+const tpl = document.getElementById('ft-tpl');
+document.querySelectorAll('.ft-placeholder').forEach(ph => {
+  ph.replaceWith(tpl.content.cloneNode(true));
+});
+
+/* ─── FAQ ACCORDION ──────────────────────────────────── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const item = this.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) { item.classList.add('open'); this.setAttribute('aria-expanded', 'true'); }
+  });
+});
+
+/* ─── SCROLL REVEAL ──────────────────────────────────── */
+function initReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+        obs.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.page.active .reveal:not(.visible)').forEach(el => obs.observe(el));
+}
+
+/* ─── INIT ───────────────────────────────────────────── */
+routeFromHash();
+// Trigger reveal on initial load after a brief frame
+requestAnimationFrame(() => setTimeout(initReveal, 60));
+</script>
+</body>
+</html>
