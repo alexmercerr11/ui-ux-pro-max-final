@@ -5,7 +5,7 @@
 $SkillsDir = Join-Path $env:USERPROFILE ".claude\skills"
 $ReposDir  = Join-Path $env:USERPROFILE ".claude\skill-repos"
 
-Write-Host "Setting up Claude Code skills..." -ForegroundColor Cyan
+Write-Host "Setting up Claude Code skills..."
 
 New-Item -ItemType Directory -Force -Path $SkillsDir | Out-Null
 New-Item -ItemType Directory -Force -Path $ReposDir  | Out-Null
@@ -27,18 +27,16 @@ Clone-Or-Pull "https://github.com/alexmercerr11/marketingskills-final.git" "mark
 Write-Host "  Copying UI/UX skills..."
 $uiSkillsPath = Join-Path $ReposDir "ui-ux-pro-max-final\.claude\skills"
 Get-ChildItem $uiSkillsPath -Directory | ForEach-Object {
-    $dest = Join-Path $SkillsDir $_.Name
-    Copy-Item -Recurse -Force $_.FullName $dest
+    Copy-Item -Recurse -Force $_.FullName (Join-Path $SkillsDir $_.Name)
 }
 
 Write-Host "  Copying marketing skills..."
 $mktSkillsPath = Join-Path $ReposDir "marketingskills-final\skills"
 Get-ChildItem $mktSkillsPath -Directory | ForEach-Object {
-    $dest = Join-Path $SkillsDir $_.Name
-    Copy-Item -Recurse -Force $_.FullName $dest
+    Copy-Item -Recurse -Force $_.FullName (Join-Path $SkillsDir $_.Name)
 }
 
 $count = (Get-ChildItem $SkillsDir -Directory).Count
 Write-Host ""
-Write-Host "Done! $count skills installed in $SkillsDir" -ForegroundColor Green
-Write-Host "Restart Claude Code — all skills will be available immediately."
+Write-Host "Done! $count skills installed in $SkillsDir"
+Write-Host "Restart Claude Code - all skills will be available immediately."
