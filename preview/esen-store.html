@@ -122,16 +122,14 @@ legend a { margin-left: auto; font-weight: 400; color: var(--ink-2); font-size: 
 .add { width: 100%; min-height: 56px; background: var(--ink); color: var(--on-ink); font-weight: 500; font-size: 16px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; transition: opacity .15s; }
 .add:hover { opacity: .9; }
 .add:active { transform: scale(.99); }
-.assure { list-style: none; margin: 0; padding: 0; font-size: 14px; color: var(--ink-2); }
-.assure li { padding: 10px 0; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 12px; }
-.assure li b { color: var(--ink); font-weight: 500; text-align: right; }
 
-/* Quote */
-.quote { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-.quote .wrap { padding-block: clamp(56px, 9vw, 120px); display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 7fr) minmax(0, 3fr); gap: 0 24px; }
-.quote blockquote { grid-column: 2; margin: 0; font: italic 300 clamp(30px, 4vw, 54px)/1.12 var(--serif); letter-spacing: -0.015em; text-wrap: balance; }
-.quote p { grid-column: 2; font-size: 14px; color: var(--ink-2); margin-top: 20px; }
-@media (max-width: 767px) { .quote .wrap { grid-template-columns: 1fr; } .quote blockquote, .quote p { grid-column: 1; } }
+/* Opener: lifestyle photo with the quote beneath */
+.opener { border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.opener .wrap { padding-block: 24px clamp(48px, 7vw, 96px); display: flex; flex-direction: column; align-items: center; gap: clamp(32px, 5vw, 56px); }
+.opener figure { width: 100%; max-width: 860px; }
+.opener img { display: block; width: 100%; height: auto; }
+.opener blockquote { margin: 0; max-width: 22ch; text-align: center; font: italic 300 clamp(30px, 4vw, 54px)/1.12 var(--serif); letter-spacing: -0.015em; text-wrap: balance; }
+@media (max-width: 767px) { .opener figure { margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); width: auto; } .opener figcaption { padding-inline: max(16px, env(safe-area-inset-left, 0px)); } }
 
 /* Sections */
 .sec { padding-block: clamp(64px, 9vw, 120px) 0; scroll-margin-top: 60px; }
@@ -250,6 +248,16 @@ footer a { display: inline-flex; align-items: center; min-height: 44px; }
 </nav>
 
 <main id="top">
+  <section class="opener" aria-label="The Bubble Throw in Charcoal">
+    <div class="wrap">
+      <figure>
+        <img src="img/01-esen-charcoal-lifestyle.jpg" width="768" height="602" alt="Woman with a mug of coffee wrapped in a Charcoal bubble throw on a cream sofa">
+        <figcaption><span>Charcoal, on a cold morning</span></figcaption>
+      </figure>
+      <blockquote>“It feels soft and cloud-like on both sides, and it’s the throw everyone fights over on the couch.”</blockquote>
+    </div>
+  </section>
+
   <div class="wrap pdp">
     <div class="g-main">
       <figure>
@@ -284,11 +292,6 @@ footer a { display: inline-flex; align-items: center; min-height: 44px; }
 
         <button class="add" type="button" id="addBtn"><span>Add to cart</span><span class="num" id="addPrice">$35.99</span></button>
 
-        <ul class="assure">
-          <li><span>Ships</span><b id="shipLine">—</b></li>
-          <li><span>Arrives</span><b id="arriveLine">—</b></li>
-          <li><span>Returns</span><b>Final sale, damaged items replaced</b></li>
-        </ul>
       </div>
     </div>
 
@@ -299,16 +302,8 @@ footer a { display: inline-flex; align-items: center; min-height: 44px; }
       </figure>
       <figure data-photo="02-esen-milk-white-texture" data-alt="Hand pressing into the bubble texture of a Milk White throw" data-cap="The raised bubble, up close"></figure>
       <figure data-photo="04-esen-dusty-blue-folded" data-alt="Dusty Blue throw folded on a bed, showing its thickness" data-cap="Folded, to show the thickness"></figure>
-      <figure class="wide" data-photo="01-esen-charcoal-lifestyle" data-alt="Woman with a coffee wrapped in a Charcoal throw on a cream sofa" data-cap="Charcoal, on a cold morning"></figure>
     </div>
   </div>
-
-  <section class="quote" aria-label="From the product notes">
-    <div class="wrap">
-      <blockquote>“It feels soft and cloud-like on both sides, and it’s the throw everyone fights over on the couch.”</blockquote>
-      <p>Polyester faux fur, no animal fur. Machine washable on cold.</p>
-    </div>
-  </section>
 
   <section class="sec" id="colours" aria-labelledby="colTitle">
     <div class="wrap">
@@ -616,13 +611,6 @@ footer a { display: inline-flex; align-items: center; min-height: 44px; }
     const f = foot > 0 ? `and <em>${foot} cm</em> over the foot` : `and the lower <em>${Math.round(s.l / usable * 100)}%</em> of its length`;
     $("planSay").innerHTML = `On a ${b.name.toLowerCase()} bed, the ${dims(s)} throw ${a} ${f}.`;
   }
-
-  /* Delivery dates in business days */
-  const addBiz = (d, n) => { const x = new Date(d); while (n > 0) { x.setDate(x.getDate() + 1); const w = x.getDay(); if (w && w < 6) n--; } return x; };
-  const fmt = (d) => d.toLocaleDateString("en-CA", { month: "short", day: "numeric" });
-  const now = new Date();
-  $("shipLine").textContent = `${fmt(addBiz(now, 1))} – ${fmt(addBiz(now, 3))}`;
-  $("arriveLine").textContent = `${fmt(addBiz(now, 7))} – ${fmt(addBiz(now, 15))}`;
 
   /* Cart */
   function add() {
